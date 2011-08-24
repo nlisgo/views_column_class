@@ -1,0 +1,6 @@
+name = Views Column Class
+description = Apply classes to each row of your view relevant to it's position in columns that will be styled using css (e.g. offers easy integration with grids)
+package = Views
+core = 7.x
+dependencies[] = views
+files[] = includes/views_columnclass_style_plugin.inc

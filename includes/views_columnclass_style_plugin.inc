@@ -71,7 +71,7 @@ class views_columnclass_style_plugin extends views_plugin_style {
     );
     $form['advanced_classes'] = array(
       '#title' => t('Advanced classes'),
-      '#description' => t('Entries one per line and in the format <em>columns|class_column_left!class_column_right|column_class_prefix</em>.'),
+      '#description' => t('Entries one per line and in the format <em>columns|class_column_left|class_column_right|column_class_prefix</em>.'),
       '#type' => 'textarea',
       '#rows' => 5,
       '#default_value' => $this->options['advanced_classes'],

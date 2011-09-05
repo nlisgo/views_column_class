@@ -28,6 +28,16 @@ function views_columnclass_views_api() {
   );
 }
 
+/**
+ * Implements template_preprocess_HOOK().
+ *
+ * Populate each instance of $vars['classes'][$id] where $id id the current position in the 
+ * view results with the classes specified by the primary and advanced settings in our form
+ *
+ * @see template_preprocess_views_view_list()
+ * @see views_columnclass_prepare_advanced()
+ * @see views_columnclass_set_row_classes()
+ */
 function template_preprocess_views_view_columnclass(&$vars) {
   template_preprocess_views_view_list($vars);
 
@@ -54,6 +64,27 @@ function template_preprocess_views_view_columnclass(&$vars) {
   }
 }
 
+/**
+ * Prepare array of values that will be applied as classes to a row
+ * 
+ * @param mixed $vars_class_id
+ *   Referenced value to store the classes to be be applied to the row template
+ * 
+ * @param int $count
+ *   The current row in the view results
+ * 
+ * @param int $columns
+ *   Number of columns imposed by the defined settings
+ * 
+ * @param string $class_left
+ *   Add this value in the array to be applied if current position is in the first column of results
+ * 
+ * @param string $class_right
+ *   Add this value in the array to be applied if current position is in the last column of results
+ * 
+ * @param string $column_class_prefix
+ *   Add this value in each array if not blank to be applied. The current column position will be appended to this string
+ */
 function views_columnclass_set_row_classes(&$vars_class_id, $count, $columns, $class_left, $class_right, $column_class_prefix) {
   if ($count%$columns == 0 && $class_left) {
     $vars_class_id[] = $class_left;
@@ -66,6 +97,21 @@ function views_columnclass_set_row_classes(&$vars_class_id, $count, $columns, $c
   }
 }
 
+/**
+ * Parse the input from the Advanced classes textarea
+ * 
+ * @param string $advanced
+ *   Expects one entry per line with each line accepting upto 4 values using | as a delimiter.
+ *   (e.g. columns|class_left|class_right|column_class_prefix)
+ *
+ * @return
+ *   array that has a depth of 2
+ *   a collection of arrays of 4 values
+ *   1. The columns
+ *   2. The class to apply to the blocks in the left column
+ *   3. The class to apply to the blocks in the right column
+ *   4. The class to apply as a prefix in each column that will be followed by the column number
+ */
 function views_columnclass_prepare_advanced($advanced) {
   $advanced_parsed = array();
 

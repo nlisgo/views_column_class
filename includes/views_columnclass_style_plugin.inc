@@ -59,21 +59,18 @@ class views_columnclass_style_plugin extends views_plugin_style {
       '#description' => t('The class to provide on the wrapper, outside the list.'),
       '#type' => 'textfield',
       '#size' => '30',
-      '#default_value' => $this->options['wrapper_class'],
     );
     $form['class'] = array(
       '#title' => t('List class'),
       '#description' => t('The class to provide on the list element itself.'),
       '#type' => 'textfield',
       '#size' => '30',
-      '#default_value' => $this->options['class'],
     );
     $form['advanced_classes'] = array(
       '#title' => t('Advanced classes'),
       '#description' => t('Entries one per line and in the format <em>columns|class_column_left|class_column_right|column_class_prefix</em>.'),
       '#type' => 'textarea',
       '#rows' => 5,
-      '#default_value' => $this->options['advanced_classes'],
     );
   }
 }

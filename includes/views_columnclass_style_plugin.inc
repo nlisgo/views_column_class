@@ -21,6 +21,9 @@ class views_columnclass_style_plugin extends views_plugin_style {
     $options['column_class_prefix'] = array('default' => 'column-');
     $options['class_column_left'] = array('default' => 'alpha');
     $options['class_column_right'] = array('default' => 'omega');
+    $options['class'] = array('default' => '');
+    $options['wrapper_class'] = array('default' => '');
+    $options['advanced_classes'] = array('default' => '');
 
     return $options;
   }

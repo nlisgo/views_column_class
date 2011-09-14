@@ -86,14 +86,16 @@ function template_preprocess_views_view_columnclass(&$vars) {
  *   Add this value in each array if not blank to be applied. The current column position will be appended to this string
  */
 function views_columnclass_set_row_classes(&$vars_class_id, $count, $columns, $class_left, $class_right, $column_class_prefix) {
-  if ($count%$columns == 0 && $class_left) {
-    $vars_class_id[] = $class_left;
-  }
-  if (($count+1)%$columns == 0 && $class_right) {
-    $vars_class_id[] = $class_right;
-  }
-  if (trim($column_class_prefix) != '') {
-    $vars_class_id[] = trim($column_class_prefix) . (($count%$columns)+1);
+  if ($columns > 0) {
+    if ($count%$columns == 0 && $class_left) {
+      $vars_class_id[] = $class_left;
+    }
+    if (($count+1)%$columns == 0 && $class_right) {
+      $vars_class_id[] = $class_right;
+    }
+    if (trim($column_class_prefix) != '') {
+      $vars_class_id[] = trim($column_class_prefix) . (($count%$columns)+1);
+    }
   }
 }
 

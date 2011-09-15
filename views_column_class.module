@@ -3,10 +3,10 @@
 /**
  * Implements hook_help().
  */
-function views_columnclass_help($section = 'admin/help#views_columnclass', $arg = NULL) {
+function views_column_class_help($section = 'admin/help#views_column_class', $arg = NULL) {
   $output = '';
   switch ($section) {
-    case 'admin/help#views_columnclass':
+    case 'admin/help#views_column_class':
       $output = t('<p>This module allows you to assign class to the listed items of an ordered or unordered list that is generate as a display in views.</p>
       <p>The main application for this is when generating blocks that will be styled to appear in columns.</p>	
       <p>It is even more powerful when used with themes with responsive design because it encourages you to use grid class to specify the width of your block which can then be given a different width depending on the gird that is being apply based upon the screen resolution.</p>
@@ -21,10 +21,10 @@ function views_columnclass_help($section = 'admin/help#views_columnclass', $arg 
 /**
  * Implements hook_views_api().
  */
-function views_columnclass_views_api() {
+function views_column_class_views_api() {
   return array(
     'api' => 3,
-    'path' => drupal_get_path('module', 'views_columnclass') . '/includes',
+    'path' => drupal_get_path('module', 'views_column_class') . '/includes',
   );
 }
 
@@ -35,26 +35,26 @@ function views_columnclass_views_api() {
  * view results with the classes specified by the primary and advanced settings in our form
  *
  * @see template_preprocess_views_view_list()
- * @see views_columnclass_prepare_advanced()
- * @see views_columnclass_set_row_classes()
+ * @see views_column_class_prepare_advanced()
+ * @see views_column_class_set_row_classes()
  */
-function template_preprocess_views_view_columnclass(&$vars) {
+function template_preprocess_views_view_column_class(&$vars) {
   template_preprocess_views_view_list($vars);
 
   $rows = $vars['rows'];
   $view = $vars['view'];
   $options = $view->style_plugin->options;
   $columns = $options['columns'];
-  $advanced_classes = views_columnclass_prepare_advanced($options['advanced_classes']);
+  $advanced_classes = views_column_class_prepare_advanced($options['advanced_classes']);
 
   $count = 0;
 
   foreach ($rows as $id => $row) {
 
-    views_columnclass_set_row_classes($vars['classes'][$id], $count, $columns, $options['class_column_left'], $options['class_column_right'], $options['column_class_prefix']);
+    views_column_class_set_row_classes($vars['classes'][$id], $count, $columns, $options['class_column_left'], $options['class_column_right'], $options['column_class_prefix']);
 
     foreach ($advanced_classes as $adv_class) {
-      views_columnclass_set_row_classes($vars['classes'][$id], $count, $adv_class[0], $adv_class[1], $adv_class[2], $adv_class[3]);
+      views_column_class_set_row_classes($vars['classes'][$id], $count, $adv_class[0], $adv_class[1], $adv_class[2], $adv_class[3]);
     }
 
     // Flatten the classes to a string for each row for the template file.
@@ -85,7 +85,7 @@ function template_preprocess_views_view_columnclass(&$vars) {
  * @param string $column_class_prefix
  *   Add this value in each array if not blank to be applied. The current column position will be appended to this string
  */
-function views_columnclass_set_row_classes(&$vars_class_id, $count, $columns, $class_left, $class_right, $column_class_prefix) {    
+function views_column_class_set_row_classes(&$vars_class_id, $count, $columns, $class_left, $class_right, $column_class_prefix) {    
   if ($columns > 0) {
     if ($count%$columns == 0 && $class_left) {
       $vars_class_id[] = $class_left;
@@ -114,7 +114,7 @@ function views_columnclass_set_row_classes(&$vars_class_id, $count, $columns, $c
  *   3. The class to apply to the blocks in the right column
  *   4. The class to apply as a prefix in each column that will be followed by the column number
  */
-function views_columnclass_prepare_advanced($advanced) {
+function views_column_class_prepare_advanced($advanced) {
   $advanced_parsed = array();
 
   $advanced = trim($advanced);

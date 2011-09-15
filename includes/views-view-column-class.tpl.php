@@ -1,6 +1,6 @@
 <?php
 /**
- * @file views-view-columnclass.tpl.php
+ * @file views-view-column-class.tpl.php
  * Default simple view template to display a list of rows.
  *
  * - $title : The title of this group of rows.  May be empty.

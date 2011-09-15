@@ -1,8 +1,8 @@
 name = Views Column Class
-description = Provides the ability to present a grid based layout for views
+description = Provides the ability to present a grid based layout for views.
 package = Views
 core = 7.x
-dependencies[] = views (3.x)
+dependencies[] = views
 
 files[] = views_column_class.module
 files[] = views_column_class.views.inc

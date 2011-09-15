@@ -22,7 +22,7 @@ margin on the right of your blocks.
 
 Additionally, you can apply multiple column class settings using the advanced 
 classes textarea. This has the potential of allow you to display your items in 4 
-columns for higher screen resolutions and 2 columns for your modile devices.
+columns for higher screen resolutions and 2 columns for your mobile devices.
 
 
 Requirements

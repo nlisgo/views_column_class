@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * @todo.
+ */
+
+/**
  * Implements hook_help().
  */
 function views_column_class_help($section = 'admin/help#views_column_class', $arg = NULL) {
@@ -30,18 +35,19 @@ function views_column_class_views_api() {
 /**
  * Implements template_preprocess_HOOK().
  *
- * Populate each instance of $vars['classes'][$id] where $id id the current position in the 
- * view results with the classes specified by the primary and advanced settings in our form
+ * Populate each instance of $variables['classes'][$id] where $id is the current 
+ * position in the view results with the classes specified by the primary and 
+ * advanced settings in our form.
  *
  * @see template_preprocess_views_view_list()
  * @see views_column_class_prepare_advanced()
  * @see views_column_class_set_row_classes()
  */
-function template_preprocess_views_view_column_class(&$vars) {
-  template_preprocess_views_view_list($vars);
+function template_preprocess_views_view_column_class(&$variables) {
+  template_preprocess_views_view_list($variables);
 
-  $rows = $vars['rows'];
-  $view = $vars['view'];
+  $rows = $variables['rows'];
+  $view = $variables['view'];
   $options = $view->style_plugin->options;
   $columns = $options['columns'];
   $advanced_classes = views_column_class_prepare_advanced($options['advanced_classes']);
@@ -50,14 +56,14 @@ function template_preprocess_views_view_column_class(&$vars) {
 
   foreach ($rows as $id => $row) {
 
-    views_column_class_set_row_classes($vars['classes'][$id], $count, $columns, $options['class_column_left'], $options['class_column_right'], $options['column_class_prefix']);
+    views_column_class_set_row_classes($variables['classes'][$id], $count, $columns, $options['class_column_left'], $options['class_column_right'], $options['column_class_prefix']);
 
     foreach ($advanced_classes as $adv_class) {
-      views_column_class_set_row_classes($vars['classes'][$id], $count, $adv_class[0], $adv_class[1], $adv_class[2], $adv_class[3]);
+      views_column_class_set_row_classes($variables['classes'][$id], $count, $adv_class[0], $adv_class[1], $adv_class[2], $adv_class[3]);
     }
 
     // Flatten the classes to a string for each row for the template file.
-    $vars['classes_array'][$id] = implode(' ', $vars['classes'][$id]);
+    $variables['classes_array'][$id] = implode(' ', $variables['classes'][$id]);
 
     $count++;
   }
@@ -67,42 +73,45 @@ function template_preprocess_views_view_column_class(&$vars) {
  * Prepare array of values that will be applied as classes to a row
  * 
  * @param mixed $vars_class_id
- *   Referenced value to store the classes to be be applied to the row template
+ *   Referenced value to store the classes to be be applied to the row template.
  * 
  * @param int $count
- *   The current row in the view results
+ *   The current row in the view results.
  * 
  * @param int $columns
- *   Number of columns imposed by the defined settings
+ *   Number of columns imposed by the defined settings.
  * 
  * @param string $class_left
- *   Add this value in the array to be applied if current position is in the first column of results
+ *   Add this value in the array to be applied if current position is in the 
+ *   first column of results.
  * 
  * @param string $class_right
- *   Add this value in the array to be applied if current position is in the last column of results
+ *   Add this value in the array to be applied if current position is in the 
+ *   last column of results.
  * 
  * @param string $column_class_prefix
- *   Add this value in each array if not blank to be applied. The current column position will be appended to this string
+ *   Add this value in each array if not blank to be applied. The current column 
+ *   position will be appended to this string.
  */
-function views_column_class_set_row_classes(&$vars_class_id, $count, $columns, $class_left, $class_right, $column_class_prefix) {    
+function views_column_class_set_row_classes(&$variables_class_id, $count, $columns, $class_left, $class_right, $column_class_prefix) {    
   if ($columns > 0) {
-    if ($count%$columns == 0 && $class_left) {
-      $vars_class_id[] = $class_left;
+    if ($count % $columns == 0 && $class_left) {
+      $variables_class_id[] = $class_left;
     }
-    if (($count+1)%$columns == 0 && $class_right) {
-      $vars_class_id[] = $class_right;
+    if (($count + 1) % $columns == 0 && $class_right) {
+      $variables_class_id[] = $class_right;
     }
     if (trim($column_class_prefix) != '') {
-      $vars_class_id[] = trim($column_class_prefix) . (($count%$columns)+1);
+      $variables_class_id[] = trim($column_class_prefix) . (($count % $columns) + 1);
     }
   }
 }
 
 /**
- * Parse the input from the Advanced classes textarea
+ * Parse the input from the Advanced classes textarea.
  * 
  * @param string $advanced
- *   Expects one entry per line with each line accepting upto 4 values using | as a delimiter.
+ *   Expects one entry per line with each line accepting up to 4 values using | as a delimiter.
  *   (e.g. columns|class_left|class_right|column_class_prefix)
  *
  * @return
@@ -122,18 +131,18 @@ function views_column_class_prepare_advanced($advanced) {
 
     $advanced_array = explode("\n", $advanced);
 
-    if (count($advanced_array)>0) {
+    if (count($advanced_array) > 0) {
       foreach ($advanced_array as $id => $adv_row) {
         $adv_row_arr = explode('|', $adv_row);
         $row_elements = count($adv_row_arr);
         $row_values = array();
 
-        if ($row_elements >= 1 && (int)$adv_row_arr[0]>0) {
+        if ($row_elements >= 1 && (int) $adv_row_arr[0] > 0) {
           $advanced_parsed[] = array(
             $adv_row_arr[0],
-            ($row_elements>=2 && trim($adv_row_arr[1])!='')?trim($adv_row_arr[1]):FALSE,
-            ($row_elements>=3 && trim($adv_row_arr[2])!='')?trim($adv_row_arr[2]):FALSE,
-            ($row_elements>=4 && trim($adv_row_arr[3])!='')?trim($adv_row_arr[3]):'',
+            ($row_elements >= 2 && trim($adv_row_arr[1])!='') ? trim($adv_row_arr[1]) : FALSE,
+            ($row_elements >= 3 && trim($adv_row_arr[2])!='') ? trim($adv_row_arr[2]) : FALSE,
+            ($row_elements >= 4 && trim($adv_row_arr[3])!='') ? trim($adv_row_arr[3]) : '',
           );
         }
       }

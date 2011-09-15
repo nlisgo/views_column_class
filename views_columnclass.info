@@ -1,5 +1,5 @@
 name = Views Column Class
-description = Apply classes to each row of your view relevant to it's position in columns that will be styled using css (e.g. offers easy integration with grids)
+description = Provides a layout which allows you to apply classes that can be used to style your output into columns
 package = Views
 core = 7.x
 dependencies[] = views

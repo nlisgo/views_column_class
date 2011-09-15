@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Settings for the style of this plugin
+ * Settings for the style of this plugin.
  */
 
 /**

@@ -24,7 +24,6 @@ function views_column_class_help($section = 'admin/help#views_column_class', $ar
 function views_column_class_views_api() {
   return array(
     'api' => 3,
-    'path' => drupal_get_path('module', 'views_column_class') . '/includes',
   );
 }
 

@@ -3,5 +3,7 @@ description = Provides the ability to present a grid based layout for views
 package = Views
 core = 7.x
 dependencies[] = views (3.x)
-files[] = includes/views_column_class.views.inc
-files[] = includes/views_column_class_style_plugin.inc
+
+files[] = views_column_class.module
+files[] = views_column_class.views.inc
+files[] = views_column_class_style_plugin.inc

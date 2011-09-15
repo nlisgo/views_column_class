@@ -4,12 +4,9 @@
  * Demonstrate the actual plugin options.
  */
 
-/**
-  * Implementation of views_plugin_style().
-  */
 class views_column_class_style_plugin extends views_plugin_style {
   /**
-   * Set default options
+   * Set default options.
    */
   function option_definition() {
     $options = parent::option_definition();

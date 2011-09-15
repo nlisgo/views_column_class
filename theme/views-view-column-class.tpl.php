@@ -9,7 +9,7 @@
  */
 ?>
 <?php print $wrapper_prefix; ?>
-  <?php if (!empty($title)) : ?>
+  <?php if (!empty($title)): ?>
     <h3><?php print $title; ?></h3>
   <?php endif; ?>
   <?php print $list_type_prefix; ?>

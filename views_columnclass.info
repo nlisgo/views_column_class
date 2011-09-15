@@ -1,5 +1,5 @@
 name = Views Column Class
-description = Provides a layout which allows you to apply classes that can be used to style your output into columns
+description = Provides the ability to present a grid based layout for views
 package = Views
 core = 7.x
 dependencies[] = views
